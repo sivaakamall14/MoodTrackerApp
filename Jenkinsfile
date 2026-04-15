@@ -3,12 +3,6 @@ pipeline {
 
     stages {
 
-        stage('Checkout') {
-            steps {
-                git branch: 'main', url: 'https://github.com/sivaakamall14/MoodTrackerApp.git'
-            }
-        }
-
         stage('Build Maven (Docker)') {
             steps {
                 sh '''
@@ -27,7 +21,7 @@ pipeline {
             }
         }
 
-        stage('Show Images') {
+        stage('List Images') {
             steps {
                 sh 'docker images'
             }
