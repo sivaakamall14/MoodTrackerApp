@@ -5,7 +5,7 @@ pipeline {
 
         stage('Clone Repository') {
             steps {
-                git branch: 'main', url: 'https://github.com/sivaakamall14/mood-tracker.git'
+                git branch: 'main', url: 'https://github.com/sivaakamall14/MoodTrackerApp.git'
             }
         }
 
