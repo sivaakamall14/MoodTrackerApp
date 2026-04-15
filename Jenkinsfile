@@ -3,28 +3,29 @@ pipeline {
 
     stages {
 
-        stage('Clone Repository') {
+        stage('Checkout') {
             steps {
                 git branch: 'main', url: 'https://github.com/sivaakamall14/MoodTrackerApp.git'
             }
         }
 
-     stage('Build Project') {
-    steps {
-        dir('MoodTrackerApp') {
-            sh 'docker run --rm -v $(pwd):/app -w /app maven:3.9.6-eclipse-temurin-17 mvn clean package'
-        }
-    }
-}
-        stage('List Files (Debug)') {
+        stage('Build Maven Project') {
             steps {
-                sh 'ls'
+                dir('MoodTrackerApp') {
+                    sh 'mvn clean package'
+                }
             }
         }
 
         stage('Build Docker Image') {
             steps {
-                sh 'docker build -t mood-tracker .'
+                sh 'docker build -t mood-tracker:1.0 .'
+            }
+        }
+
+        stage('List Images') {
+            steps {
+                sh 'docker images'
             }
         }
     }

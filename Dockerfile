@@ -1,7 +1,7 @@
-FROM openjdk:17
+FROM eclipse-temurin:17-jdk
 
 WORKDIR /app
 
-COPY target/MoodTrackerApp-1.0.jar app.jar
+COPY target/*.jar app.jar
 
 ENTRYPOINT ["java","-jar","app.jar"]
