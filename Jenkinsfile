@@ -9,11 +9,15 @@ pipeline {
             }
         }
 
-        stage('Build Maven Project') {
+        stage('Build Maven (Docker)') {
             steps {
-                dir('MoodTrackerApp') {
-                    sh 'mvn clean package'
-                }
+                sh '''
+                docker run --rm \
+                -v $WORKSPACE/MoodTrackerApp:/app \
+                -w /app \
+                maven:3.9.6-eclipse-temurin-17 \
+                mvn clean package
+                '''
             }
         }
 
@@ -23,7 +27,7 @@ pipeline {
             }
         }
 
-        stage('List Images') {
+        stage('Show Images') {
             steps {
                 sh 'docker images'
             }
